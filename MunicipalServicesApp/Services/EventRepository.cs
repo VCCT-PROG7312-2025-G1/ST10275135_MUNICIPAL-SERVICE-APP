@@ -14,7 +14,7 @@ namespace MunicipalServicesApp.Services
 
         static EventRepository()
         {
-            // Seed some demo events
+            //  Demo events
             Add(new Event("E1", "Farmers Market", "Markets", "Fresh produce and crafts", DateTime.Today.AddDays(2), "Town Square"));
             Add(new Event("E2", "Roadworks Update", "Announcements", "Temporary roadworks on Main St.", DateTime.Today.AddDays(1), "Main St."));
             Add(new Event("E3", "Concert in the Park", "Entertainment", "Local bands perform", DateTime.Today.AddDays(10), "Bayview Park"));

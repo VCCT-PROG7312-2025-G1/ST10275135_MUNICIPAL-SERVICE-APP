@@ -53,10 +53,8 @@ namespace MunicipalServicesApp.Forms
                 DateTime.Now
             );
 
-            // Add to ServiceRequestRepository
             ServiceRequestRepository.Add(request);
 
-            // Optional: keep issue-specific data
             var issue = new Issue
             {
                 Location = txtLocation.Text,

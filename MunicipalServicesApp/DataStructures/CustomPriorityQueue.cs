@@ -2,7 +2,7 @@
 
 namespace MunicipalServicesApp.DataStructures
 {
-    // Node storing item + priority 
+     
     internal class PriorityNode<T>
     {
         public T Item;

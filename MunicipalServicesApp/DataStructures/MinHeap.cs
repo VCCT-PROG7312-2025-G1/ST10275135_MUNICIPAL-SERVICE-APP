@@ -61,10 +61,8 @@ namespace MunicipalServicesApp.DataStructures
 
         public int Count => heap.Count;
 
-        // Return a sorted list (non-destructive) by repeatedly extracting from a cloned heap
         public List<ServiceRequest> GetAllSortedByPriority()
         {
-            // clone internal list
             var clone = new MinHeap();
             foreach (var r in heap) clone.Insert(r);
 

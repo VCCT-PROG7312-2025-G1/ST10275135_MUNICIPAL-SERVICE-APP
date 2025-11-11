@@ -11,8 +11,11 @@ namespace MunicipalServicesApp.Forms
         private Button btnSearch;
         private Button btnShowDeps;
         private Button btnShowResolved;
+        private Button btnUpdateStatus;
         private TextBox txtSearchId;
         private Label lblSearch;
+        private Label lblUpdateStatus;
+        private ComboBox cmbUpdateStatus;
 
         protected override void Dispose(bool disposing)
         {
@@ -30,6 +33,9 @@ namespace MunicipalServicesApp.Forms
             this.btnShowDeps = new Button();
             this.btnShowResolved = new Button();
             this.lblSearch = new Label();
+            this.lblUpdateStatus = new Label();
+            this.cmbUpdateStatus = new ComboBox();
+            this.btnUpdateStatus = new Button();
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvServiceStatus)).BeginInit();
             this.SuspendLayout();
@@ -37,7 +43,7 @@ namespace MunicipalServicesApp.Forms
             // dgvServiceStatus
             this.dgvServiceStatus.Location = new System.Drawing.Point(12, 60);
             this.dgvServiceStatus.Name = "dgvServiceStatus";
-            this.dgvServiceStatus.Size = new System.Drawing.Size(760, 320);
+            this.dgvServiceStatus.Size = new System.Drawing.Size(760, 280);
             this.dgvServiceStatus.ReadOnly = true;
             this.dgvServiceStatus.AllowUserToAddRows = false;
             this.dgvServiceStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -73,6 +79,27 @@ namespace MunicipalServicesApp.Forms
             this.btnShowResolved.Text = "Show Recent Resolved";
             this.btnShowResolved.Click += new System.EventHandler(this.btnShowResolved_Click);
 
+            // lblUpdateStatus
+            this.lblUpdateStatus.Location = new System.Drawing.Point(12, 355);
+            this.lblUpdateStatus.Text = "Update Status:";
+            this.lblUpdateStatus.AutoSize = true;
+
+            // cmbUpdateStatus
+            this.cmbUpdateStatus.Location = new System.Drawing.Point(110, 352);
+            this.cmbUpdateStatus.Size = new System.Drawing.Size(160, 24);
+            this.cmbUpdateStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbUpdateStatus.Items.AddRange(new object[] {
+                "Pending",
+                "In Progress",
+                "Resolved"
+            });
+
+            // btnUpdateStatus
+            this.btnUpdateStatus.Location = new System.Drawing.Point(280, 350);
+            this.btnUpdateStatus.Size = new System.Drawing.Size(120, 28);
+            this.btnUpdateStatus.Text = "Update Status";
+            this.btnUpdateStatus.Click += new System.EventHandler(this.btnUpdateStatus_Click);
+
             // btnRefresh
             this.btnRefresh.Location = new System.Drawing.Point(12, 390);
             this.btnRefresh.Size = new System.Drawing.Size(100, 30);
@@ -93,6 +120,9 @@ namespace MunicipalServicesApp.Forms
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnShowDeps);
             this.Controls.Add(this.btnShowResolved);
+            this.Controls.Add(this.lblUpdateStatus);
+            this.Controls.Add(this.cmbUpdateStatus);
+            this.Controls.Add(this.btnUpdateStatus);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnBack);
             this.StartPosition = FormStartPosition.CenterScreen;

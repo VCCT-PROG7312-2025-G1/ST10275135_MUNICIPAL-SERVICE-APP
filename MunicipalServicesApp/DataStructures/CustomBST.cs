@@ -27,7 +27,7 @@ namespace MunicipalServicesApp.DataStructures
             int cmp = key.CompareTo(node.Key);
             if (cmp < 0) node.Left = InsertInternal(node.Left, key, value);
             else if (cmp > 0) node.Right = InsertInternal(node.Right, key, value);
-            else node.Value = value; // replace if same key
+            else node.Value = value; 
             return node;
         }
 

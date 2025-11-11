@@ -4,7 +4,6 @@ using MunicipalServicesApp.Models;
 
 namespace MunicipalServicesApp.DataStructures
 {
-    // Simple BST keyed by ServiceRequest.Id (string)
     public class BstNode
     {
         public ServiceRequest Data;
@@ -34,7 +33,7 @@ namespace MunicipalServicesApp.DataStructures
                 node.Right = InsertRec(node.Right, req);
             else
             {
-                // duplicate Id — replace or ignore (we replace)
+                // duplicate Id 
                 node.Data = req;
             }
             return node;

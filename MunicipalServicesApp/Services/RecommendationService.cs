@@ -13,15 +13,12 @@ namespace MunicipalServicesApp.Services
         {
             if (string.IsNullOrWhiteSpace(category)) return;
             searchHistory.Enqueue(category.Trim().ToLowerInvariant());
-            // maintain size
             while (searchHistory.Count > HistoryLimit) searchHistory.Dequeue();
         }
 
         public static CustomLinkedList<Event> Recommend(int topCategories = 3, int eventsPerCategory = 3)
         {
-            // tally counts using BST category -> count (int)
             var counts = new CustomBST<string, int>();
-            // iterate queue by dequeuing into temporary queue then re-enqueue to preserve history
             var temp = new CustomQueue<string>();
             while (!searchHistory.IsEmpty)
             {
@@ -31,14 +28,13 @@ namespace MunicipalServicesApp.Services
                 if (existing == null) counts.Insert(c, 1);
                 else counts.Insert(c, existing + 1);
             }
-            // restore
+         
             while (!temp.IsEmpty) searchHistory.Enqueue(temp.Dequeue());
 
-            // build priority queue
             var pq = new CustomPriorityQueue<string>();
             foreach (var kv in counts)
             {
-                // kv.Value is count
+                
                 pq.Enqueue(kv.Key, kv.Value);
             }
 

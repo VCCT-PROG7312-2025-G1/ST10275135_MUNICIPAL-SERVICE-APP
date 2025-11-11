@@ -25,6 +25,7 @@ namespace MunicipalServicesApp.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+
             this.headerPanel = new Panel();
             this.picLogo = new PictureBox();
             this.lblTitle = new Label();
@@ -35,7 +36,7 @@ namespace MunicipalServicesApp.Forms
             this.btnServiceStatus = new Button();
             this.btnDashboard = new Button();
 
-            // headerPanel
+            // Header Panel
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(10, 90, 138);
             this.headerPanel.Controls.Add(this.picLogo);
             this.headerPanel.Controls.Add(this.lblTitle);
@@ -43,94 +44,89 @@ namespace MunicipalServicesApp.Forms
             this.headerPanel.Dock = DockStyle.Top;
             this.headerPanel.Height = 100;
 
-            // picLogo
-            this.picLogo.Image = Properties.Resources.Bayview_flag; // make sure it exists
+            // Logo
+            this.picLogo.Image = Properties.Resources.Bayview_flag; 
             this.picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             this.picLogo.Location = new System.Drawing.Point(20, 15);
             this.picLogo.Size = new System.Drawing.Size(70, 70);
 
-            // lblTitle
+            // Title
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(100, 15);
             this.lblTitle.Size = new System.Drawing.Size(500, 35);
             this.lblTitle.Text = "Bayview Metropolitan Municipality";
 
-            // lblSubtitle
+            // Subtitle
             this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblSubtitle.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblSubtitle.Location = new System.Drawing.Point(102, 55);
             this.lblSubtitle.Size = new System.Drawing.Size(400, 25);
             this.lblSubtitle.Text = "Digital Citizen Services Portal";
 
-            // menuPanel
+            // Menu Panel
             this.menuPanel.FlowDirection = FlowDirection.TopDown;
             this.menuPanel.WrapContents = false;
             this.menuPanel.Padding = new Padding(20);
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(180, 255, 255, 255);
             this.menuPanel.Size = new System.Drawing.Size(340, 300);
-            this.menuPanel.Location = new System.Drawing.Point(
-                (600 - 340) / 2,
-                (400 - 300) / 2
-            );
+            this.menuPanel.Location = new System.Drawing.Point((600 - 340) / 2, (400 - 300) / 2);
             this.menuPanel.Anchor = AnchorStyles.None;
 
-            // btnReportIssues
-            this.btnReportIssues.Text = "Report Issues";
-            this.btnReportIssues.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnReportIssues.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnReportIssues.Margin = new Padding(10);
-            this.btnReportIssues.Size = new System.Drawing.Size(300, 50);
-            this.btnReportIssues.Click += new EventHandler(this.btnReportIssues_Click);
+            // Buttons
+            SetupButton(btnReportIssues, "Report Issues", new EventHandler(this.btnReportIssues_Click));
+            SetupButton(btnEvents, "Local Events & Announcements", new EventHandler(this.btnEvents_Click));
+            SetupButton(btnServiceStatus, "Service Request Status", new EventHandler(this.btnServiceStatus_Click));
+            SetupButton(btnDashboard, "Dashboard", new EventHandler(this.btnDashboard_Click));
 
-            // btnEvents
-            this.btnEvents.Text = "Local Events & Announcements";
-            this.btnEvents.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnEvents.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnEvents.FlatStyle = FlatStyle.Flat;
-            this.btnEvents.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.btnEvents.FlatAppearance.BorderSize = 2;
-            this.btnEvents.Margin = new Padding(10);
-            this.btnEvents.Size = new System.Drawing.Size(300, 50);
-            this.btnEvents.Click += new EventHandler(this.btnEvents_Click);
-
-            // btnServiceStatus
-            this.btnServiceStatus.Text = "Service Request Status";
-            this.btnServiceStatus.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnServiceStatus.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnServiceStatus.FlatStyle = FlatStyle.Flat;
-            this.btnServiceStatus.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.btnServiceStatus.FlatAppearance.BorderSize = 2;
-            this.btnServiceStatus.Margin = new Padding(10);
-            this.btnServiceStatus.Size = new System.Drawing.Size(300, 50);
-            this.btnServiceStatus.Click += new EventHandler(this.btnServiceStatus_Click);
-
-            // btnDashboard
-            this.btnDashboard.Text = "Dashboard";
-            this.btnDashboard.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDashboard.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDashboard.FlatStyle = FlatStyle.Flat;
-            this.btnDashboard.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.btnDashboard.FlatAppearance.BorderSize = 2;
-            this.btnDashboard.Margin = new Padding(10);
-            this.btnDashboard.Size = new System.Drawing.Size(300, 50);
-            this.btnDashboard.Click += new EventHandler(this.btnDashboard_Click);
-
+            // Add buttons to panel
             this.menuPanel.Controls.AddRange(new Control[] {
-                this.btnReportIssues,
-                this.btnEvents,
-                this.btnServiceStatus,
-                this.btnDashboard
+                btnReportIssues,
+                btnEvents,
+                btnServiceStatus,
+                btnDashboard
             });
 
-            // MainForm
+            // Main Form
             this.ClientSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.headerPanel);
-            this.BackgroundImage = Properties.Resources.gov; 
+            this.BackgroundImage = Properties.Resources.gov;
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Main Menu";
+
+            // Role-based visibility
+            ApplyRoleSettings();
+        }
+
+        private void SetupButton(Button btn, string text, EventHandler clickEvent)
+        {
+            btn.Text = text;
+            btn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            btn.BackColor = System.Drawing.Color.WhiteSmoke;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
+            btn.FlatAppearance.BorderSize = 2;
+            btn.Margin = new Padding(10);
+            btn.Size = new System.Drawing.Size(300, 50);
+            btn.Click += clickEvent;
+        }
+
+        private void ApplyRoleSettings()
+        {
+            if (UserStore.CurrentUser == null) return;
+
+            if (UserStore.CurrentUser.Role == "Resident")
+            {
+                btnReportIssues.Visible = true;
+                btnDashboard.Visible = false;
+            }
+            else if (UserStore.CurrentUser.Role == "Employee")
+            {
+                btnReportIssues.Visible = false;
+                btnDashboard.Visible = true;
+            }
         }
     }
 }

@@ -1,7 +1,11 @@
-﻿namespace MunicipalServicesApp.Models
+﻿using System;
+
+namespace MunicipalServicesApp.Models
 {
     public class Issue
     {
+        public string Id { get; set; } = Guid.NewGuid().ToString(); // unique ID
+
         public string Location { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }

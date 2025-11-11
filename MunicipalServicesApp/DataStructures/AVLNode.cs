@@ -3,7 +3,7 @@ using MunicipalServicesApp.Models;
 
 namespace MunicipalServicesApp.DataStructures
 {
-    // Node class for AVL Tree
+    
     public class AVLNode
     {
         public ServiceRequest Data;
@@ -14,7 +14,7 @@ namespace MunicipalServicesApp.DataStructures
         public AVLNode(ServiceRequest data)
         {
             Data = data;
-            Height = 1; // New node has height 1
+            Height = 1;
         }
     }
 
@@ -22,13 +22,12 @@ namespace MunicipalServicesApp.DataStructures
     {
         public AVLNode Root;
 
-        // Utility function to get height of a node
+       
         private int Height(AVLNode node) => node?.Height ?? 0;
 
-        // Balance factor
         private int GetBalance(AVLNode node) => node == null ? 0 : Height(node.Left) - Height(node.Right);
 
-        // Right rotation
+
         private AVLNode RightRotate(AVLNode y)
         {
             AVLNode x = y.Left;
@@ -43,7 +42,7 @@ namespace MunicipalServicesApp.DataStructures
             return x;
         }
 
-        // Left rotation
+    
         private AVLNode LeftRotate(AVLNode x)
         {
             AVLNode y = x.Right;
@@ -58,7 +57,6 @@ namespace MunicipalServicesApp.DataStructures
             return y;
         }
 
-        // Insert a new ServiceRequest
         public AVLNode Insert(AVLNode node, ServiceRequest data)
         {
             if (node == null) return new AVLNode(data);
@@ -68,27 +66,25 @@ namespace MunicipalServicesApp.DataStructures
             else if (data.DateSubmitted > node.Data.DateSubmitted)
                 node.Right = Insert(node.Right, data);
             else
-                return node; // Duplicate dates not allowed (or handle differently)
+                return node; 
 
             node.Height = 1 + Math.Max(Height(node.Left), Height(node.Right));
             int balance = GetBalance(node);
 
-            // Left Left Case
+          
             if (balance > 1 && data.DateSubmitted < node.Left.Data.DateSubmitted)
                 return RightRotate(node);
 
-            // Right Right Case
+      
             if (balance < -1 && data.DateSubmitted > node.Right.Data.DateSubmitted)
                 return LeftRotate(node);
 
-            // Left Right Case
             if (balance > 1 && data.DateSubmitted > node.Left.Data.DateSubmitted)
             {
                 node.Left = LeftRotate(node.Left);
                 return RightRotate(node);
             }
 
-            // Right Left Case
             if (balance < -1 && data.DateSubmitted < node.Right.Data.DateSubmitted)
             {
                 node.Right = RightRotate(node.Right);
@@ -98,13 +94,12 @@ namespace MunicipalServicesApp.DataStructures
             return node;
         }
 
-        // Public Insert method
         public void Insert(ServiceRequest data)
         {
             Root = Insert(Root, data);
         }
 
-        // In-order traversal to get sorted list
+     
         public void InOrderTraversal(AVLNode node, System.Collections.Generic.List<ServiceRequest> list)
         {
             if (node == null) return;

@@ -6,23 +6,19 @@ namespace MunicipalServicesApp.Services
 {
     public static class ServiceRequestRepository
     {
-        //  SortedDictionary to group requests by date
         private static SortedDictionary<DateTime, Queue<ServiceRequest>> requestsByDate =
             new SortedDictionary<DateTime, Queue<ServiceRequest>>();
 
-        //  Dictionary to group requests by status
         private static Dictionary<string, List<ServiceRequest>> requestsByStatus =
             new Dictionary<string, List<ServiceRequest>>(StringComparer.OrdinalIgnoreCase);
 
-        //  HashSet to store unique statuses
         private static HashSet<string> uniqueStatuses = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-        //  Stack to simulate recently resolved requests
         private static Stack<ServiceRequest> resolvedRequests = new Stack<ServiceRequest>();
 
         static ServiceRequestRepository()
         {
-            // Seed demo service requests
+            // Demo service requests
             Add(new ServiceRequest("REQ001", "Water Leak - Main Street", "Pending", DateTime.Today.AddDays(-2)));
             Add(new ServiceRequest("REQ002", "Electricity Outage - Central", "In Progress", DateTime.Today.AddDays(-1)));
             Add(new ServiceRequest("REQ003", "Pothole Repair - Oak Ave", "Resolved", DateTime.Today));
@@ -76,7 +72,7 @@ namespace MunicipalServicesApp.Services
         //  Get unique statuses
         public static HashSet<string> GetUniqueStatuses() => uniqueStatuses;
 
-        //  Get recently resolved (top 5 from stack)
+        //  Get recently resolved 
         public static List<ServiceRequest> GetRecentResolved()
         {
             var result = new List<ServiceRequest>();

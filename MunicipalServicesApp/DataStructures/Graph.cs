@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace MunicipalServicesApp.DataStructures
 {
-    // Graph keyed by ServiceRequest.Id (string). We use string node ids.
     public class Graph
     {
         private Dictionary<string, List<string>> adj = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
@@ -12,11 +11,9 @@ namespace MunicipalServicesApp.DataStructures
         {
             if (!adj.ContainsKey(from)) adj[from] = new List<string>();
             adj[from].Add(to);
-            // ensure 'to' exists in adjacency map to simplify traversal
             if (!adj.ContainsKey(to)) adj[to] = new List<string>();
         }
 
-        // Depth-first traversal returning visited node ids (start included)
         public List<string> DfsTraverse(string start)
         {
             var result = new List<string>();
@@ -36,7 +33,7 @@ namespace MunicipalServicesApp.DataStructures
                 DFS(n, visited, result);
         }
 
-        // Return adjacency map copy (useful for debugging)
+        
         public Dictionary<string, List<string>> GetAdjacency()
         {
             var copy = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
